@@ -39,7 +39,23 @@ footer{background:var(--deep);color:var(--blush-soft);padding:56px 0 30px;margin
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .note{font-size:13px;color:var(--muted);margin-top:8px}
 .buy{margin-top:22px;display:grid;gap:10px}
-.msg{display:none;margin-top:12px;background:var(--blush-soft);border-radius:12px;padding:14px;font-size:14px;white-space:pre-wrap;color:var(--deep)}
+.cartbtn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--deep);background:transparent;color:var(--deep);border-radius:999px;padding:9px 18px;font-size:14px;font-weight:500;transition:.2s}.cartbtn:hover{background:var(--deep);color:#fff}
+.cartbtn i{font-style:normal;background:var(--mauve);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
+#ov{position:fixed;inset:0;background:rgba(58,42,46,.45);opacity:0;pointer-events:none;transition:.25s;z-index:40}#ov.on{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--cream);z-index:50;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-20px 0 40px -20px rgba(58,42,46,.4);visibility:hidden}#drawer.on{transform:none;visibility:visible}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}.dh h3{font-size:30px}.dh .x{background:none;border:0;font-size:32px;line-height:1;color:var(--deep)}
+.db{flex:1;overflow-y:auto;padding:18px 22px}.df{padding:14px 22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center}.df a{text-decoration:underline;color:var(--deep)}
+.cbtn{display:flex;width:100%;align-items:center;justify-content:center;padding:14px 24px;border-radius:999px;font-weight:500;font-size:15px;border:1.5px solid var(--deep);background:var(--deep);color:#fff;transition:.2s;margin-top:10px}.cbtn:hover{background:var(--mauve);border-color:var(--mauve)}.cbtn.ghost{background:transparent;color:var(--deep)}.cbtn.ghost:hover{background:var(--deep);color:#fff}
+.line{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}.line img{width:72px;height:90px;object-fit:cover;border-radius:10px;background:var(--blush-soft)}
+.line b{font-family:"Cormorant Garamond",serif;font-size:21px;color:var(--deep);display:block;line-height:1.15}.line small{display:block;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:3px}
+.lq{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:14px}.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;background:#fff}.qty button{background:none;border:0;width:32px;height:32px;font-size:18px;color:var(--deep)}.qty span{min-width:24px;text-align:center;font-size:14px}
+.rm{background:none;border:0;font-size:12px;color:var(--muted);text-decoration:underline;margin-left:10px}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:500;color:var(--deep);padding:16px 0 4px}.dnote{font-size:12.5px;color:var(--muted);margin-top:6px}
+.cf label{display:block;font-size:13px;color:var(--deep);margin:12px 0 5px;font-weight:500}.cf .fld{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font:inherit;background:#fff;color:var(--ink)}.cf .fld:focus{outline:2px solid var(--blush);border-color:var(--mauve)}
+.pay{background:var(--blush-soft);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--deep);margin-top:14px}
+.done{text-align:center;padding:20px 0}.done h4{font-family:"Cormorant Garamond",serif;font-size:34px;color:var(--deep);margin:8px 0}.done .sum{text-align:left;margin-top:18px;font-size:14px;color:var(--muted)}
+.padd{margin-top:14px;max-width:340px}.padd .btn{width:100%}.pprice{font-family:"Cormorant Garamond",serif;font-size:26px;color:var(--deep);margin-top:14px}
+
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
 .fact{background:var(--blush-soft);border-radius:14px;padding:14px 10px;text-align:center;font-size:13px;color:var(--deep)}.fact b{display:block;font-family:"Cormorant Garamond",serif;font-size:24px}
 details{border-bottom:1px solid var(--line);padding:16px 0}summary{cursor:pointer;list-style:none;font-weight:500;color:var(--deep);display:flex;justify-content:space-between}summary::-webkit-details-marker{display:none}summary::after{content:"+";font-size:22px;line-height:1}details[open] summary::after{content:"–"}
@@ -52,56 +68,113 @@ section.block{padding:72px 0}.sec-head{margin-bottom:30px}.sec-head h2{font-size
 .rev{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}@media(max-width:900px){.rev{grid-template-columns:1fr}}
 .rev blockquote{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;font-size:16px}.rev cite{display:block;margin-top:12px;font-style:normal;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mauve)}
 </style></head><body>
-<div class="announce">Cene i porudžbine trenutno putem poruke — pišite nam na Instagramu @_baby_story_rs</div>
+<div class="announce">Personalizovani ramovi iz Bora · Plaćanje pouzećem</div>
 <header class="site"><div class="wrap"><a class="logo" href="index.html"><img src="img/logo.jpg" alt="Baby story"><span>Baby story</span></a>
 <nav><a href="index.html#proizvodi">Proizvodi</a><a href="index.html#kako">Kako radi</a><a href="index.html#utisci">Utisci</a><a class="on" href="ram-moja-prva-godina.html">Ram za bebu</a></nav>
-<a class="chip" href="https://www.instagram.com/_baby_story_rs/" target="_blank" rel="noopener">Instagram</a></div></header>
+<button class="cartbtn" aria-label="Otvori korpu">Korpa <i>0</i></button></div></header>
 <main class="wrap">
 <div class="crumbs"><a href="index.html">Početna</a><span>/</span>Ramovi<span>/</span>Moja prva godina</div>
 <div class="product">
 <div class="gallery"><div class="thumbs" id="thumbs"></div><div class="stage"><img id="stage" src="img/hero.jpg" alt="Ram Moja prva godina"></div></div>
-<div class="info">
+<div class="info" id="izgled">
 <span class="eyebrow">Personalizovani ram</span>
 <h1>Ram „Moja prva godina“</h1>
-<div class="price">Cena na upit<small>Cenu potvrđujemo u poruci, nakon što izaberete izgled rama.</small></div>
+<div class="price"><span id="pr">4.500 RSD</span><small>Cena zavisi od izabranog oblika rama.</small></div>
 <p class="intro">Ram za fotografije vaše bebe predviđen za slikanje svakog bebinog meseca. Zalepite fotografiju na predviđeno mesto i stvorite uspomenu za ceo život.</p>
 
 <div class="opt"><div class="opt-h">Podloga <span id="baseLbl">— drvo</span></div><div class="chips" data-k="base"><button class="chip on" data-v="drvo" data-img="wood">Drvo</button><button class="chip" data-v="belo" data-img="hero">Belo</button></div></div>
 <div class="opt"><div class="opt-h">Motiv <span id="motLbl">— bez motiva</span></div><div class="chips" data-k="motiv"><button class="chip on" data-v="bez motiva">Bez motiva</button><button class="chip" data-v="leptirići" data-img="butterfly">Leptirići</button><button class="chip" data-v="lavići" data-img="lion2">Lavići</button><button class="chip" data-v="žirafa i slon" data-img="giraffe">Žirafa i slon</button><button class="chip" data-v="Minnie" data-img="minnie">Minnie</button><button class="chip" data-v="srca">Srca</button></div></div>
 <div class="opt"><div class="opt-h">Pismo</div><div class="chips" data-k="pismo"><button class="chip on" data-v="ćirilica">Ćirilica</button><button class="chip" data-v="latinica">Latinica</button><button class="chip" data-v="engleski (My First Year)" data-img="tabla">Engleski</button></div></div>
-<div class="opt"><div class="opt-h">Oblik</div><div class="chips" data-k="oblik"><button class="chip on" data-v="luk">Luk</button><button class="chip" data-v="meda" data-img="meda1">Meda</button><button class="chip" data-v="blizanci (Naša prva godina)">Blizanci</button></div></div>
-<div class="opt"><div class="opt-h">Ime bebe</div><input class="field" id="ime" placeholder="npr. Dorotea"><div class="row2" style="margin-top:10px"><input class="field" id="dat" placeholder="Datum rođenja"><input class="field" id="det" placeholder="Vreme, težina, dužina (opciono)"></div><p class="note">Slova imena su u ogledalskoj završnici (uočeno u zlatnoj, srebrnoj i roze boji) — boju dogovarate u poruci.</p></div>
-<div class="buy"><button class="btn" id="send">Pošalji upit na Instagram</button><a class="btn ghost" href="#detalji">Sve o ramu</a><div class="msg" id="msg"></div></div>
+<div class="opt"><div class="opt-h">Boja slova <span>(ogledalska završnica)</span></div><div class="chips" data-k="boja"><button class="chip on" data-v="zlatna">Zlatna</button><button class="chip" data-v="srebrna">Srebrna</button><button class="chip" data-v="roze">Roze</button></div></div>
+<div class="opt"><div class="opt-h">Oblik</div><div class="chips" data-k="oblik"><button class="chip on" data-v="luk" data-p="4500">Luk</button><button class="chip" data-v="meda" data-img="meda1" data-p="4900">Meda</button><button class="chip" data-v="blizanci (Naša prva godina)" data-p="4500">Blizanci</button></div></div>
+<div class="opt"><div class="opt-h">Ime bebe</div><input class="field" id="ime" placeholder="npr. Dorotea"><div class="row2" style="margin-top:10px"><input class="field" id="dat" placeholder="Datum rođenja"><input class="field" id="det" placeholder="Vreme, težina, dužina (opciono)"></div><p class="note" id="imeNote">Ime bebe je potrebno da bismo izradili ram.</p></div>
+<div class="buy"><button class="btn" id="send">Dodaj u korpu</button><a class="btn ghost" href="#detalji">Sve o ramu</a></div>
 <div class="facts"><div class="fact"><b>12</b>mesta za slike</div><div class="fact"><b>42×57</b>cm, drvo</div><div class="fact"><b>10×10</b>cm fotografija</div></div>
 <div class="acc" id="detalji">
 <details open><summary>Šta dobijate</summary><div class="in"><ul><li>Drveni ram dimenzija 42 cm × 57 cm sa 12 predviđenih mesta, po jedno za svaki mesec</li><li>Ime i datum (i po želji vreme, težina i dužina) prema vašem izboru</li><li>Ram stiže bez fotografija: „Mi vam pošaljemo ram, a vi stavljate slike po želji“</li></ul></div></details>
 <details><summary>Fotografije</summary><div class="in">Dimenzija fotografija koje se lepe je 10 × 10 cm, a moguće je uraditi i druge dimenzije po vašoj želji.</div></details>
-<details><summary>Dostava i plaćanje</summary><div class="in">Detalje o ceni dostave, roku izrade i načinu plaćanja dogovarate u poruci. <em>(Nije javno objavljeno — potvrditi sa brendom.)</em></div></details>
+<details><summary>Dostava i plaćanje</summary><div class="in">Plaćanje je pouzećem, prilikom preuzimanja pošiljke. Cena dostave i rok izrade potvrđuju se nakon porudžbine, jer se svaki ram izrađuje prema vašim izborima. Plišane žirafice stižu na vašu adresu za 48 sati.</div></details>
 </div></div></div>
 
-<section class="block" id="meda"><div class="split"><div class="imgs"><img src="img/meda1.jpg" alt="Ram Meda" loading="lazy"><img src="img/meda2.jpg" alt="Ram Meda, drvo" loading="lazy"></div><div><span class="eyebrow">Ram Meda</span><h2 style="font-size:clamp(30px,4.4vw,46px);margin-top:8px">U zagrljaju preslatkog medvedića</h2><p>Naši personalizovani ramovi u obliku mede savršen su način da sačuvate dragocene trenutke — bilo da je to prvi osmeh vaše bebe ili prvi rođendan. Ovakav model rama možete pronaći samo kod nas.</p><p>Ime, datum ili bilo šta drugo po vašoj želji. Cena na upit.</p></div></div></section>
+<section class="block" id="meda"><div class="split"><div class="imgs"><img src="img/meda1.jpg" alt="Ram Meda" loading="lazy"><img src="img/meda2.jpg" alt="Ram Meda, drvo" loading="lazy"></div><div><span class="eyebrow">Ram Meda</span><h2 style="font-size:clamp(30px,4.4vw,46px);margin-top:8px">U zagrljaju preslatkog medvedića</h2><p>Naši personalizovani ramovi u obliku mede savršen su način da sačuvate dragocene trenutke — bilo da je to prvi osmeh vaše bebe ili prvi rođendan. Ovakav model rama možete pronaći samo kod nas.</p><p>Ime, datum ili bilo šta drugo po vašoj želji. Cena: 4.900 RSD.</p><div class="padd"><button class="btn" id="medaBtn">Izaberi ram Meda</button></div></div></div></section>
 
-<section class="block" id="plocice" style="background:var(--blush-soft)"><div class="wrap"><div class="split"><div><span class="eyebrow">Novo kod nas</span><h2 style="font-size:clamp(30px,4.4vw,46px);margin-top:8px">Pločice za slikanje beba</h2><p>Pločice za obeležavanje svakog bebinog meseca izrađene su u formi preslatkih oblačića. Možemo ih izraditi i u drugim oblicima, po vašoj želji. Svaki set pločica sastoji se od 12 komada, ne prodaje se pojedinačno. Pločice su od drveta, dimenzija 10 cm × 10 cm.</p><p>Model 1: plavi oblačići · Model 2: roze cvetići. Cena na upit.</p></div><div class="imgs"><img src="img/plocice1.jpg" alt="Pločice oblačići" loading="lazy"><img src="img/plocice2.jpg" alt="Pločice cvetići" loading="lazy"></div></div></div></section>
+<section class="block" id="plocice" style="background:var(--blush-soft)"><div class="wrap"><div class="split"><div><span class="eyebrow">Novo kod nas</span><h2 style="font-size:clamp(30px,4.4vw,46px);margin-top:8px">Pločice za slikanje beba</h2><p>Pločice za obeležavanje svakog bebinog meseca izrađene su u formi preslatkih oblačića. Možemo ih izraditi i u drugim oblicima, po vašoj želji. Svaki set pločica sastoji se od 12 komada, ne prodaje se pojedinačno. Pločice su od drveta, dimenzija 10 cm × 10 cm.</p><p>Model 1: plavi oblačići · Model 2: roze cvetići.</p><div class="pprice">2.200 RSD <span style="font-size:14px;font-family:Jost;color:var(--muted)">po setu od 12 komada</span></div><div id="pmodel" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="chip on" data-v="Model 1: plavi oblačići" data-img="img/plocice1.jpg">Model 1 · oblačići</button><button class="chip" data-v="Model 2: roze cvetići" data-img="img/plocice2.jpg">Model 2 · cvetići</button></div><div class="padd"><button class="btn" id="plocBtn">Dodaj u korpu</button></div></div><div class="imgs"><img src="img/plocice1.jpg" alt="Pločice oblačići" loading="lazy"><img src="img/plocice2.jpg" alt="Pločice cvetići" loading="lazy"></div></div></div></section>
 
-<section class="block" id="zirafa"><div class="split"><div class="imgs"><img src="img/zirafa1.jpg" alt="Plišane žirafice" loading="lazy"><img src="img/zirafa2.jpg" alt="Žirafica visoka 85 cm" loading="lazy"></div><div><span class="eyebrow">Plišana žirafica</span><h2 style="font-size:clamp(30px,4.4vw,46px);margin-top:8px">Visoka 85 cm, preslatka</h2><p>Plišane žirafice stižu na vašu adresu za samo 48 sati. Količine su ograničene. Cena na upit.</p></div></div></section>
+<section class="block" id="zirafa"><div class="split"><div class="imgs"><img src="img/zirafa1.jpg" alt="Plišane žirafice" loading="lazy"><img src="img/zirafa2.jpg" alt="Žirafica visoka 85 cm" loading="lazy"></div><div><span class="eyebrow">Plišana žirafica</span><h2 style="font-size:clamp(30px,4.4vw,46px);margin-top:8px">Visoka 85 cm, preslatka</h2><p>Plišane žirafice stižu na vašu adresu za samo 48 sati. Količine su ograničene.</p><div class="pprice">3.900 RSD</div><div class="padd"><button class="btn" id="zirBtn" data-add data-id="zirafa" data-name="Plišana žirafica 85 cm" data-price="3900" data-img="img/zirafa1.jpg" data-opts="[]">Dodaj u korpu</button></div></div></div></section>
 
 <section class="block" style="background:var(--blush-soft)"><div class="wrap"><div class="sec-head"><span class="eyebrow">Utisci</span><h2>Poruke kupaca</h2></div><div class="rev">
 <blockquote>Stigao je ram, još je lepši uživo, svaka čast!<cite>Poruka kupca · Instagram</cite></blockquote>
 <blockquote>Preuzela sam ram nikako da Vam javim, SAVRSEN JE ja sam odusevljena zaista svaka cast, prelepo<cite>Poruka kupca · Instagram</cite></blockquote>
 <blockquote>Samo da javim, ram je stigao i prelep je, još kad uradim fotografijice biće pravi šećer. Najlepše vam hvala, zaista je sve pedantno i precizno. Od mene sve preporuke.<cite>Poruka kupca · Instagram</cite></blockquote></div></div></section>
 </main>
-<footer><div class="wrap"><span class="script" style="font-size:38px;color:var(--blush)">Baby story</span><p>Sve za bebe na jednom mestu. Personalizovani ramovi. Bor, Srbija.</p><p style="margin-top:12px">Porudžbine i cene: <a href="https://www.instagram.com/_baby_story_rs/" target="_blank" rel="noopener">@_baby_story_rs</a></p><p class="fine">Neslužbeni mockup izrađen na osnovu Instagram profila brenda. Cene, rokovi isporuke i uslovi nisu potvrđeni.</p></div></footer>
+<footer><div class="wrap"><span class="script" style="font-size:38px;color:var(--blush)">Baby story</span><p>Sve za bebe na jednom mestu. Personalizovani ramovi. Bor, Srbija.</p><p style="margin-top:12px">Pitanja? Pišite nam na Instagramu <a href="https://www.instagram.com/_baby_story_rs/" target="_blank" rel="noopener">@_baby_story_rs</a></p><p class="fine">Neslužbeni mockup izrađen na osnovu Instagram profila brenda. Cene su okvirne, a rokovi isporuke i uslovi nisu potvrđeni.</p></div></footer>
+<div id="ov"></div>
+<aside id="drawer" aria-label="Korpa" aria-hidden="true"><div class="dh"><h3 id="dtitle">Korpa</h3><button class="x" id="dclose" aria-label="Zatvori">&times;</button></div><div class="db" id="dbody"></div><div class="df">Pitanja? Pišite nam na Instagramu <a href="https://www.instagram.com/_baby_story_rs/" target="_blank" rel="noopener">@_baby_story_rs</a></div></aside>
+
 <script>
+var cur='wood';
 const imgs=[["hero","Belo, leptirići"],["wood","Drvo"],["butterfly","Leptirići"],["lion2","Lavići"],["giraffe","Žirafa i slon"],["minnie","Minnie"],["tabla","My First Year"],["meda1","Meda"]];
 const stage=document.getElementById('stage'),th=document.getElementById('thumbs');
-function show(n){stage.src='img/'+n+'.jpg';[...th.children].forEach(b=>b.classList.toggle('on',b.dataset.n===n))}
+function show(n){cur=n;stage.src='img/'+n+'.jpg';[...th.children].forEach(b=>b.classList.toggle('on',b.dataset.n===n))}
 imgs.forEach(([n,a])=>{const b=document.createElement('button');b.dataset.n=n;b.innerHTML='<img src="img/'+n+'.jpg" alt="'+a+'">';b.onclick=()=>show(n);th.appendChild(b)});show('wood');
 const sel={};
 document.querySelectorAll('.chips').forEach(g=>{sel[g.dataset.k]=g.querySelector('.on').dataset.v;g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');sel[g.dataset.k]=c.dataset.v;if(c.dataset.img)show(c.dataset.img);document.getElementById('baseLbl').textContent='— '+sel.base;document.getElementById('motLbl').textContent='— '+sel.motiv})});
-document.getElementById('send').onclick=()=>{
- const t='Zdravo! Zanima me ram "Moja prva godina".\nPodloga: '+sel.base+'\nMotiv: '+sel.motiv+'\nPismo: '+sel.pismo+'\nOblik: '+sel.oblik+'\nIme: '+(ime.value||'-')+'\nDatum rođenja: '+(dat.value||'-')+'\nOstalo: '+(det.value||'-')+'\nMolim vas za cenu i rok izrade.';
- const m=document.getElementById('msg');m.style.display='block';m.textContent=t;
- try{navigator.clipboard.writeText(t);m.textContent=t+'\n\n(Poruka je kopirana — nalepite je u DM.)'}catch(e){}
- window.open('https://ig.me/m/_baby_story_rs','_blank','noopener');};
+document.getElementById('send').onclick=function(){
+ var ime=document.getElementById('ime'),nt=document.getElementById('imeNote');
+ if(!ime.value.trim()){ime.focus();nt.style.color='#b3413a';nt.textContent='Upišite ime bebe da bismo dodali ram u korpu.';return}
+ var v=function(id){return document.getElementById(id).value.trim()};
+ window.BS.add({id:'ram',name:sel.oblik==='meda'?'Ram Meda':'Ram „Moja prva godina“',price:price(),img:'img/'+cur+'.jpg',opts:[['Podloga',sel.base],['Motiv',sel.motiv],['Pismo',sel.pismo],['Boja slova',sel.boja],['Oblik',sel.oblik],['Ime bebe',v('ime')],['Datum rođenja',v('dat')],['Vreme, težina, dužina',v('det')]]});
+};
+function price(){return +document.querySelector('[data-k="oblik"] .chip.on').dataset.p}
+function upd(){document.getElementById('pr').textContent=price().toLocaleString('de-DE')+' RSD'}
+document.querySelector('[data-k="oblik"]').addEventListener('click',upd);
+document.getElementById('medaBtn').onclick=function(){document.querySelector('[data-k="oblik"] [data-v="meda"]').click();document.getElementById('izgled').scrollIntoView({behavior:'smooth'})};
+var pm=document.getElementById('pmodel'),pmSel=pm.querySelector('.on');
+pm.addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;pm.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});c.classList.add('on');pmSel=c});
+document.getElementById('plocBtn').onclick=function(){window.BS.add({id:'plocice',name:'Pločice za mesece (set od 12)',price:2200,img:pmSel.dataset.img,opts:[['Model',pmSel.dataset.v]]})};
+try{if(new URLSearchParams(location.search).get('oblik')==='meda'){document.querySelector('[data-k="oblik"] [data-v="meda"]').click()}}catch(e){}
+(function(){
+var KEY='bs_cart',mem=[];
+function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(v))return v}catch(e){}return mem}
+var cart=load();
+function save(){mem=cart;try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}}
+function fmt(n){return n.toLocaleString('de-DE')+' RSD'}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+var ov=document.getElementById('ov'),dr=document.getElementById('drawer'),bd=document.getElementById('dbody'),tt=document.getElementById('dtitle'),view='cart',doneHtml='';
+function count(){return cart.reduce(function(a,l){return a+l.qty},0)}
+function total(){return cart.reduce(function(a,l){return a+l.qty*l.price},0)}
+function badge(){document.querySelectorAll('.cartbtn i').forEach(function(i){i.textContent=count()})}
+function open(){dr.classList.add('on');ov.classList.add('on');dr.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function close(){dr.classList.remove('on');ov.classList.remove('on');dr.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+function optsTxt(o){return o.filter(function(x){return x[1]}).map(function(x){return esc(x[0])+': '+esc(x[1])}).join('<br>')}
+function render(){
+ if(view==='cart'){tt.textContent='Korpa';
+  if(!cart.length){bd.innerHTML='<p style="color:var(--muted);padding:20px 0">Korpa je prazna.</p><button class="cbtn" data-a="close">Nastavi kupovinu</button>';return}
+  bd.innerHTML=cart.map(function(l,i){return '<div class="line"><img src="'+esc(l.img)+'" alt=""><div><b>'+esc(l.name)+'</b><small>'+optsTxt(l.opts)+'</small><div class="lq"><span><span class="qty"><button data-a="dec" data-i="'+i+'" aria-label="Manje">&minus;</button><span>'+l.qty+'</span><button data-a="inc" data-i="'+i+'" aria-label="Više">+</button></span><button class="rm" data-a="del" data-i="'+i+'">Ukloni</button></span><strong>'+fmt(l.qty*l.price)+'</strong></div></div></div>'}).join('')+'<div class="tot"><span>Ukupno</span><span>'+fmt(total())+'</span></div><p class="dnote">Plaćanje pouzećem. Cena dostave se obračunava pri isporuci.</p><button class="cbtn" data-a="checkout">Nastavi na plaćanje</button><button class="cbtn ghost" data-a="close">Nastavi kupovinu</button>';
+ }else if(view==='checkout'){tt.textContent='Podaci za isporuku';
+  bd.innerHTML='<form class="cf" id="cf"><label for="f1">Ime i prezime</label><input class="fld" id="f1" name="ime" required autocomplete="name"><label for="f2">Adresa</label><input class="fld" id="f2" name="adresa" required autocomplete="street-address"><label for="f3">Grad</label><input class="fld" id="f3" name="grad" required autocomplete="address-level2"><label for="f4">Telefon</label><input class="fld" id="f4" name="telefon" type="tel" required pattern="[0-9+ /()\\-]{6,}" autocomplete="tel"><label for="f5">E-mail</label><input class="fld" id="f5" name="email" type="email" required autocomplete="email"><label for="f6">Napomena / personalizacija (opciono)</label><textarea class="fld" id="f6" name="napomena" rows="3" placeholder="npr. boja slova, način pisanja imena"></textarea><div class="pay"><b>Način plaćanja:</b> pouzećem, prilikom preuzimanja pošiljke.</div><div class="tot"><span>Ukupno ('+count()+')</span><span>'+fmt(total())+'</span></div><button class="cbtn" type="submit">Pošalji porudžbinu</button><button class="cbtn ghost" type="button" data-a="back">Nazad na korpu</button></form>';
+  document.getElementById('cf').addEventListener('submit',submit);
+ }else{tt.textContent='Porudžbina';bd.innerHTML=doneHtml}
+}
+function submit(e){e.preventDefault();var f=e.target,no='BS-'+String(Date.now()).slice(-6),sum=cart.map(function(l){return '<div style="padding:6px 0;border-bottom:1px solid var(--line)"><b style="color:var(--deep)">'+l.qty+' × '+esc(l.name)+'</b> — '+fmt(l.qty*l.price)+'<br><small>'+optsTxt(l.opts)+'</small></div>'}).join('');
+ doneHtml='<div class="done"><span class="script" style="font-size:40px">Hvala,</span><h4>porudžbina je primljena</h4><p style="color:var(--muted)">Broj porudžbine: <b>'+no+'</b><br>Potvrdu šaljemo na '+esc(f.email.value)+'.</p><div class="sum">'+sum+'<div class="tot"><span>Ukupno</span><span>'+fmt(total())+'</span></div><p>Isporuka na: '+esc(f.ime.value)+', '+esc(f.adresa.value)+', '+esc(f.grad.value)+'<br>Plaćanje pouzećem.'+(f.napomena.value?'<br>Napomena: '+esc(f.napomena.value):'')+'</p></div><button class="cbtn" data-a="close">Nazad u prodavnicu</button></div>';
+ cart=[];save();badge();view='done';render();bd.scrollTop=0}
+function add(it){var key=it.id+'|'+JSON.stringify(it.opts),f=cart.filter(function(l){return l.key===key})[0];
+ if(f)f.qty++;else cart.push({key:key,id:it.id,name:it.name,opts:it.opts,price:it.price,img:it.img,qty:1});
+ save();badge();view='cart';render();open()}
+bd.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a,i=+b.dataset.i;
+ if(a==='close'){close();if(view==='done'){view='cart';render()}}
+ else if(a==='inc'){cart[i].qty++;save();badge();render()}
+ else if(a==='dec'){cart[i].qty=Math.max(1,cart[i].qty-1);save();badge();render()}
+ else if(a==='del'){cart.splice(i,1);save();badge();render()}
+ else if(a==='checkout'){view='checkout';render()}
+ else if(a==='back'){view='cart';render()}});
+document.getElementById('dclose').onclick=close;ov.onclick=close;
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+document.querySelectorAll('.cartbtn').forEach(function(b){b.onclick=function(){if(view==='done')view='cart';render();open()}});
+document.querySelectorAll('[data-add]').forEach(function(b){b.onclick=function(){add({id:b.dataset.id,name:b.dataset.name,price:+b.dataset.price,img:b.dataset.img,opts:JSON.parse(b.dataset.opts||'[]')})}});
+window.BS={add:add,open:open};badge();render();
+})();
+
 </script>
 </body></html>
